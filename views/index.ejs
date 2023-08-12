@@ -1,0 +1,42 @@
+<%- include("partials/header.ejs") %>
+      <main>
+       
+        
+
+
+        <div class="container text-center">
+          <h1 class="main-title"><%= listTitle %></h1>
+          <div class="list-opacity">
+          <form action="/" method="post" class="item">
+              <input type="text" class='form-control' name="newItem" placeholder="New Item" autocomplete="off">
+              <button class='todo-button' type="submit" name="list" value="<%= listTitle  %>">
+                <i class="bi bi-plus-lg"></i>
+              </button>
+          </form>
+        </div>
+
+        <% if  (locals.tasks) { %>
+      
+          <ul class="list-group list-opacity">
+          <% tasks.forEach(element => { %>
+
+            <form action="/delete" method="post">
+              <li class="list-group-item input-opacity">
+                <input class="form-check-input me-1"  type="checkbox" name="checkbox" value="<%= element._id %>" onchange="this.form.submit()">
+                <%= element["name"]  %>
+                <input type="hidden"  name="list" value="<%= listTitle  %>">
+              </li>
+              <!-- Kvoli vymazaniu, kedze tam mame listy podla kategorii -->
+              <!-- <input type="hidden" name="listName" value="<%= listTitle %>"></input>  -->
+            </form>
+
+         <% }); %>
+        </ul>
+        <%  } %>
+
+
+       
+      </main>
+      
+      <%- include("partials/footer.ejs") %>
+     
